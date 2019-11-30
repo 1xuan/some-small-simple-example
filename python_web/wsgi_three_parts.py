@@ -1,12 +1,55 @@
 #! /usr/bin/python3
 
 """
+The Web Server Gateway Interface (WSGI) is a standard interface between `web
+server software` and `web applications` written in Python. (WSGI is just a
+**specification**.)
+
 This is a relatively complete WSGI snippt for three parts.
 
 It shows us how to design server, middleware and application.
 
-For more info and Code Source(Changed slightly at Middleware part):
+- The simplest example
+
+~~~python
+from wsgiref.simple_server import make_server
+
+def app(environ, start_response):
+    body = b'Hello World\n'
+    status = '200 OK'
+    headers = [('Content-type', 'text/plain')]
+    start_response(status, headers)
+    return [body]
+
+if __name__ == '__main__':
+    try:
+        httpd = make_server('', 8080, app)
+        print('serve', '127.0.0.1', '...')
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print('Goodbye')
+~~~
+
+then:
+~~~bash
+$ curl http://127.0.0.1:8080/
+Hello World
+~~~
+
+And this .py file:
+
+~~~
+$ python3 wsgi_three_parts.py
+Status: 200 OK
+Content-type: text/plain
+Ifmmp!Xpsme
+~~~
+
+Code Source(Changed slightly at Middleware part):
     https://www.python.org/dev/peps/pep-3333/
+
+For more info: 
+    https://www.toptal.com/python/pythons-wsgi-server-application-interface
 """
 
 # --------------------------------------------------
