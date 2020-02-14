@@ -1,1 +1,1 @@
-Some basic examples against certain concept.
+Some basic examples for certain concept.
